@@ -6,11 +6,14 @@ import os
 from player import Player
 from constants import C
 
-TITLE = "THE DINOS are TAKING OVER THE WORLD"
+TITLE = "THE DINOS are TAKING OVER THE WORLD. So we have to stop them (With nukes)."
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 background = Actor("background1")
+
+WIDTH = C.WIDTH
+HEIGHT = C.HEIGHT
 
 
 
@@ -22,12 +25,14 @@ playerActor = Actor(playerData.getImage())
 def draw():
     screen.clear()
     background.draw()
+    playerActor.image = playerData.getImage()
     playerActor.draw()
     
-def update ():
+def update():
     playerData.readKeyboard(keyboard)
     playerActor.x = playerData.x
     playerActor.y = playerData.y
+    playerData.update()
 
 
 pgzrun.go()
