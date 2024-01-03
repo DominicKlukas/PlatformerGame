@@ -3,24 +3,22 @@ from constants import C
 grassblockHeight = 70
 grassblockWidth = 71
 
-grassblockY = C.HEIGHT - grassblockHeight
+groundHeight = C.HEIGHT - grassblockHeight
 
-platformY = [100, 200, 300]
-platformX = [100, 800, 500]
-platformWidth = [3, 3, 3]
+numPlatforms = 5
+platformY = [100, 200, 300, groundHeight, groundHeight]
+platformX = [100, 800, 500, 0, 781]
+platformWidth = [3, 3, 3, 8, 6]
 
 def drawEnvironment(screen):
-    for x in range(int(C.WIDTH/grassblockWidth)+1):
-        screen.blit('grassblock', (x*grassblockWidth, grassblockY))#
-    
-    for y in range(3):
+    for y in range(numPlatforms):
         for x in range(platformWidth[y]):
             screen.blit('grassblock', (platformX[y] + x*grassblockWidth, platformY[y]))
 
 
 def getGround(x, y):##
-    for i in range(3):
+    for i in range(numPlatforms):
         if y <= platformY[i]+grassblockHeight/2:
             if x > platformX[i] - C.PLAYERWIDTH/4 and x < platformX[i] + platformWidth[i]*grassblockWidth + C.PLAYERWIDTH/4:
                 return platformY[i]
-    return grassblockY
+    return C.HEIGHT

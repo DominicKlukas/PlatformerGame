@@ -23,11 +23,14 @@ class Player:
         self.jumpPower = 20
         self.glidingSpeed = 2
         self.attackLength = 0
+        self.playerIsDead = False
         
     def getImage(self):#This method returns the current image of the 
         return self.image
     
     def readKeyboard(self, keyboard):
+        if self.playerIsDead:
+            return
         accelerating = False
         if keyboard.D:
             self.velocity_x += self.accel
@@ -63,9 +66,17 @@ class Player:
                 self.velocity_x -= self.accel
             elif self.velocity_x < 0:
                 self.velocity_x += self.accel
-        
+
+    def killPlayer(self):
+        self.playerIsDead = True
+        self.velocity_x = 0
+
+    def playerDead(self):
+        return self.playerIsDead
     
     def update(self):#
+        if self.y > C.HEIGHT:
+            self.killPlayer()
         # this condition checks if you are on the ground
         if(self.y >= self.floor and self.velocity_y > 0):
             self.velocity_y = 0
@@ -84,7 +95,7 @@ class Player:
             self.x = 0
         # if self.x > C.WIDTH - 72/2:
             # self.velocity_x = 0
-            # self.x = C.WIDTH - 72/2
+           # self.x = C.WIDTH - 72/2
         
         self.y += self.velocity_y
         self.velocity_y += C.GRAVITY
@@ -113,6 +124,9 @@ class Player:
         
         if self.isAttacking:
             self.image = 'attack__005'
-        
+
         if self.facingLeft and self.image[-1:]!='l':#
             self.image += '_l'
+
+        if self.playerIsDead:
+            self.image = 'dead__009'

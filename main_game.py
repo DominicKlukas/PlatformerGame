@@ -28,7 +28,10 @@ def draw():
     playerActor.image = playerData.getImage()
     playerActor.draw()
     drawEnvironment(screen)
-    
+    if playerData.playerDead():
+        screen.blit('black_mask75', (0, 0))
+        screen.draw.text("Game Over", fontsize=72, color=(255, 0, 0), center=(C.WIDTH/2, C.HEIGHT/2))
+   
 def update():
     playerData.readKeyboard(keyboard)
     playerData.update()
