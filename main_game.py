@@ -5,6 +5,7 @@ import os
 #Homemade programs
 from player import Player
 from constants import C
+from game_environment import *
 
 TITLE = "THE DINOS are TAKING OVER THE WORLD. So we have to stop them (With nukes)."
 
@@ -14,7 +15,6 @@ background = Actor("background1")
 
 WIDTH = C.WIDTH
 HEIGHT = C.HEIGHT
-
 
 
 #Variables to do with the player
@@ -27,12 +27,14 @@ def draw():
     background.draw()
     playerActor.image = playerData.getImage()
     playerActor.draw()
+    drawEnvironment(screen)
     
 def update():
     playerData.readKeyboard(keyboard)
-    playerActor.x = playerData.x
-    playerActor.y = playerData.y
     playerData.update()
+    playerData.floor = getGround(playerData.x, playerData.y)
+    playerActor.midbottom = (playerData.x, playerData.y)
+    
 
 
 pgzrun.go()
