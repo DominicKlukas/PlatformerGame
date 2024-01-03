@@ -74,13 +74,17 @@ class Player:
         else:
             self.isJumping = True
         
-        if self.x < 0 + 72/2:
-            self.velocity_x = 0
-            self.x = 0 + 72/2
-        
-        if self.x > C.WIDTH - 72/2:
-            self.velocity_x = 0
-            self.x = C.WIDTH - 72/2
+        if self.x < 0:
+            self.x = C.WIDTH
+        # if self.x < 0 + 72/2:
+            # self.velocity_x = 0
+            # self.x = 0 + 72/2
+
+        if self.x > C.WIDTH:
+            self.x = 0
+        # if self.x > C.WIDTH - 72/2:
+            # self.velocity_x = 0
+            # self.x = C.WIDTH - 72/2
         
         self.y += self.velocity_y
         self.velocity_y += C.GRAVITY
