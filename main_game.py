@@ -34,7 +34,5 @@ def update():
     playerData.update()
     playerData.floor = getGround(playerData.x, playerData.y)
     playerActor.midbottom = (playerData.x, playerData.y)
-    
-
 
 pgzrun.go()
